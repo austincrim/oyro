@@ -6,7 +6,7 @@ import { getCachedAccessToken } from './token'
  * @type {import('@sveltejs/kit').RequestHandler}
  */
 export const get = async ({ headers }) => {
-  const sessionId = cookie.parse(headers.cookie).session_id
+  const sessionId = headers.cookie ? cookie.parse(headers.cookie).session_id : null
   const accessToken = getCachedAccessToken(sessionId)
   const t = await fetchTransactions(accessToken)
   

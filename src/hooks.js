@@ -5,7 +5,7 @@ import cookie from 'cookie'
  */
 export const handle = async ({ request, resolve }) => {
   const response = await resolve(request)
-  const sessionId = cookie.parse(request.headers.cookie)
+  const sessionId = request.headers.cookie ? cookie.parse(request.headers.cookie) : null
   if (request.path === '/login') {
     if (sessionId) {
       request.locals.sessionId = sessionId
