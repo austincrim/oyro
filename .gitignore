@@ -6,3 +6,5 @@ node_modules/
 /package
 .env
 token.json
+# Local Netlify folder
+.netlify

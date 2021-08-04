@@ -13,17 +13,20 @@ export const handle = async ({ request, resolve }) => {
         ...response,
         status: 307,
         headers: {
-          location: 'http://localhost:3000/'
+          location: '/'
         }
       }
     }
   } else {
     if (!sessionId) {
+      if (request.path === '/api/token') {
+        return response
+      }
       return {
         ...response,
         status: 307,
         headers: {
-          location: 'http://localhost:3000/login'
+          location: '/login'
         }
       }
     }
