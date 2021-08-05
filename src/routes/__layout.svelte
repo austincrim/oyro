@@ -1,21 +1,25 @@
 <script>
-  import { page, navigating } from '$app/stores'
+  import { page, navigating, session } from '$app/stores'
 </script>
 
 <nav>
   <span class:loading={$navigating} class="brand">Oyro</span>
   <ul>
-    <li>
-      <a class:active={$page.path === '/'} href="/">Dashboard</a>
-    </li>
-    <li>
-      <a class:active={$page.path === '/budgets'} href="/budgets">Budgets</a>
-    </li>
-    <li>
-      <a class:active={$page.path === '/transactions'} href="/transactions">
-        Transactions
-      </a>
-    </li>
+    {#if $session.user}
+      <li>
+        <a class:active={$page.path === '/'} href="/">Dashboard</a>
+      </li>
+      <li>
+        <a class:active={$page.path === '/budgets'} href="/budgets">Budgets</a>
+      </li>
+      <li>
+        <a class:active={$page.path === '/transactions'} href="/transactions">
+          Transactions
+        </a>
+      </li>
+    {:else}
+      <li />
+    {/if}
   </ul>
 </nav>
 <main>
@@ -28,10 +32,12 @@
     --text-opacity: 75%;
     --text-hover-opacity: 100%;
 
-    --bg-primary: hsl(40 100% 77% / var(--primary-opacity));
+    --bg-primary: 40 100% 77%;
     --text-link: hsl(0 0% 0% / var(--text-opacity));
     --text-link-hover: hsl(0 0% 0% / var(--text-hover-opacity));
     --text-primary: hsl(40 100% 15% / var(--primary-opacity));
+
+    --radius: 7px;
   }
 
   :global(*) {
@@ -57,11 +63,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--bg-primary);
+    background-color: hsl(var(--bg-primary));
     height: 70px;
     padding: 0 4rem;
   }
-  
+
   ul {
     display: flex;
     gap: 2rem;
@@ -87,6 +93,26 @@
     color: var(--text-link-hover);
     padding-bottom: 2px;
     border-bottom: 2px solid #00000099;
+  }
+
+  :global(input) {
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    border: 1px solid lightgrey;
+  }
+
+  :global(button[data-type='primary']) {
+    border: none;
+    background-color: hsl(var(--bg-primary) / 100%);
+    --bg-hover: hsl(var(--bg-primary) / 75%);
+    padding: 1rem 2rem;
+    border-radius: var(--radius);
+    transition: background-color .1s ease;
+    font-size: 1.1rem;
+  }
+
+  :global(button[data-type='primary']):hover {
+    background-color: var(--bg-hover);
   }
 
   .loading {

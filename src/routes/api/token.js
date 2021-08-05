@@ -6,26 +6,26 @@ import { v4 as uuid } from '@lukeed/uuid'
  * @type {import('@sveltejs/kit/types').RequestHandler}
  */
 export const post = async ({ body }) => {
-  if (body.public_token) {
-    const session_id = await getAccessToken(body.public_token)
-    return {
-      status: 200,
-      headers: {
-        'set-cookie': `session_id=${session_id}; HttpOnly; Secure`
+  try {
+    if (body.public_token) {
+      const session_id = await saveAccessToken(body.public_token)
+      return {
+        status: 200,
+        headers: {
+          'set-cookie': `session_id=${session_id}; HttpOnly; Secure`
+        }
       }
     }
-  }
-  const request = {
-    user: {
-      client_user_id: 'abc'
-    },
-    client_name: 'Fungify',
-    products: ['transactions'],
-    language: 'en',
-    webhook: 'https://webhook.example.com',
-    country_codes: ['US']
-  }
-  try {
+    const request = {
+      user: {
+        client_user_id: 'abc'
+      },
+      client_name: 'Fungify',
+      products: ['transactions'],
+      language: 'en',
+      webhook: 'https://webhook.example.com',
+      country_codes: ['US']
+    }
     const createTokenResponse = await client.linkTokenCreate(request)
     return {
       body: createTokenResponse.data
@@ -46,7 +46,7 @@ export function getCachedAccessToken(session_id) {
   return null
 }
 
-async function getAccessToken(publicToken) {
+async function saveAccessToken(publicToken) {
   try {
     const response = await client.itemPublicTokenExchange({
       public_token: publicToken

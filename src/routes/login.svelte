@@ -1,30 +1,35 @@
-<script>
-  import { onMount } from 'svelte'
+<main>
+  <h1>Login to Oyro</h1>
+  <form action="/api/login" method="POST">
+    <label>
+      Email
+      <input name="email" type="email" />
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" />
+    </label>
+    <button data-type="primary">Sign up</button>
+  </form>
+</main>
 
-  onMount(async () => {
-    const res = await fetch('/api/token', { method: 'POST' })
-    const json = await res.json()
+<style>
+  main {
+    max-width: 400px;
+    margin: 0 auto;
+  }
 
-    if (json.link_token) {
-      const linkHandler = Plaid.create({
-        token: json.link_token,
-        onSuccess: (public_token, metadata) => {
-          // Send the public_token to your app server.
-          fetch('/api/token', {
-            method: 'POST',
-            body: JSON.stringify({ public_token }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-        }
-      })
-      linkHandler.open()
-    }
-  })
-</script>
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 0;
+    gap: 1rem;
+  }
 
-<svelte:head>
-  <script
-    src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
-</svelte:head>
+  label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    gap: 0.5rem;
+  }
+</style>
