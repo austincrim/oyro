@@ -1,26 +1,29 @@
 import client from '$lib/plaid'
 import * as fs from 'fs'
-import { v4 as uuid } from '@lukeed/uuid'
+import prisma from '$lib/prisma'
 
 /**
  * @type {import('@sveltejs/kit/types').RequestHandler}
  */
-export const post = async ({ body }) => {
+export const post = async ({ body, locals }) => {
   try {
     if (body.public_token) {
-      const session_id = await saveAccessToken(body.public_token)
+      const user = locals.user
+      const { access_token, item_id } = await getAccessToken(body.public_token)
+      await saveItem({
+        accessToken: access_token,
+        itemId: item_id,
+        user
+      })
       return {
-        status: 200,
-        headers: {
-          'set-cookie': `session_id=${session_id}; HttpOnly; Secure`
-        }
+        status: 200
       }
     }
     const request = {
       user: {
         client_user_id: 'abc'
       },
-      client_name: 'Fungify',
+      client_name: 'Oyro',
       products: ['transactions'],
       language: 'en',
       webhook: 'https://webhook.example.com',
@@ -38,28 +41,28 @@ export const post = async ({ body }) => {
   }
 }
 
-export function getCachedAccessToken(session_id) {
-  if (fs.existsSync('./token.json')) {
-    const tokens = JSON.parse(fs.readFileSync('./token.json').toString())
-    if (tokens[session_id]) return tokens[session_id]
-  }
-  return null
-}
-
-async function saveAccessToken(publicToken) {
+async function getAccessToken(publicToken) {
   try {
-    const response = await client.itemPublicTokenExchange({
+    const { data } = await client.itemPublicTokenExchange({
       public_token: publicToken
     })
-    const session_id = uuid()
-    fs.writeFileSync(
-      './token.json',
-      JSON.stringify({
-        [session_id]: response.data.access_token
-      })
-    )
-    return session_id
+    return data
   } catch (error) {
     throw new Error(JSON.stringify(error.response.data, null, 2))
   }
+}
+
+async function saveItem({ accessToken, itemId, user }) {
+  const item = await prisma.plaidItem.create({
+    data: {
+      accessToken,
+      itemId,
+      user: {
+        connect: {
+          email: user.email
+        }
+      }
+    }
+  })
+  return item
 }

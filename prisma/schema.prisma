@@ -30,6 +30,6 @@ model PlaidItem {
   itemId String @id
   accessToken String
   user User @relation(fields: [email], references: [email])
-  email String
+  email String @unique
   createdAt DateTime @default(now())
 }

@@ -1,15 +1,12 @@
-import cookie from 'cookie'
+import { getAccessToken } from '$lib/auth'
 import client from '$lib/plaid'
-import { getCachedAccessToken } from './token'
 
-/**
- * @type {import('@sveltejs/kit').RequestHandler}
- */
-export const get = async ({ headers }) => {
-  const sessionId = headers.cookie ? cookie.parse(headers.cookie).session_id : null
-  const accessToken = getCachedAccessToken(sessionId)
+/** @type {import('@sveltejs/kit').RequestHandler} */
+export const get = async ({ query, locals }) => {
+  const itemId = query.get('itemId')
+  const accessToken = await getAccessToken(locals.user.email, itemId)
   const t = await fetchTransactions(accessToken)
-  
+
   return {
     status: 200,
     body: t
@@ -26,6 +23,6 @@ async function fetchTransactions(accessToken) {
     const response = await client.transactionsGet(request)
     return response.data.transactions
   } catch (err) {
-    console.error(err)
+    console.error(err.response.data)
   }
 }

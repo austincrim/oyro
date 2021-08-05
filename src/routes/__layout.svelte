@@ -5,7 +5,7 @@
 <nav>
   <span class:loading={$navigating} class="brand">Oyro</span>
   <ul>
-    {#if $session.user}
+    {#if $session?.email}
       <li>
         <a class:active={$page.path === '/'} href="/">Dashboard</a>
       </li>
@@ -38,6 +38,7 @@
     --text-primary: hsl(40 100% 15% / var(--primary-opacity));
 
     --radius: 7px;
+    --text-lg: 2rem;
   }
 
   :global(*) {
@@ -49,6 +50,19 @@
   }
 
   :global(h1, h2, h3, h4, h5, h6) {
+    color: var(--text-primary);
+  }
+
+  :global(html, body, #svelte) {
+    height: 100%;
+    width: 100%
+  }
+
+  :global(.text-lg) {
+    font-size: var(--text-lg);
+  }
+
+  :global(.text-primary) {
     color: var(--text-primary);
   }
 
@@ -78,6 +92,7 @@
     max-width: clamp(400px, 70vw, 850px);
     margin: 0 auto;
     padding: 4rem;
+    height: 100%;
   }
 
   a {
