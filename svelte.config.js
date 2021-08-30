@@ -9,7 +9,7 @@ const config = {
 			esbuild: (defaults) => {
 				return {
 					...defaults,
-					external: ['mock-aws-s3', 'aws-sdk', 'nock']
+					external: ['mock-aws-s3', 'aws-sdk', 'nock', 'debug']
 				}
 			}
 		}),

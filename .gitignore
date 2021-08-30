@@ -8,3 +8,5 @@ node_modules/
 token.json
 # Local Netlify folder
 .netlify
+
+.vercel
