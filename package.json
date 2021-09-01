@@ -1,32 +1,31 @@
 {
-  "name": "oyro",
-  "version": "0.0.1",
-  "repository": {
-    "url": "https://github.com/austincrim/oyro"
-  },
-  "license": "NONE",
-  "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "preview": "svelte-kit preview",
-    "lint": "prettier --check --plugin-search-dir=. .",
-    "format": "prettier --write --plugin-search-dir=. ."
-  },
-  "devDependencies": {
-    "@sveltejs/adapter-netlify": "^1.0.0-next.29",
-    "@sveltejs/adapter-vercel": "^1.0.0-next.27",
-    "@sveltejs/kit": "^1.0.0-next.161",
-    "prettier": "~2.2.1",
-    "prettier-plugin-svelte": "^2.2.0",
-    "prisma": "^2.28.0",
-    "svelte": "^3.34.0"
-  },
-  "type": "module",
-  "dependencies": {
-    "@lukeed/uuid": "^2.0.0",
-    "@prisma/client": "^2.28.0",
-    "argon2": "^0.28.2",
-    "cookie": "^0.4.1",
-    "plaid": "^9.0.0-beta.14"
-  }
+	"name": "oyro",
+	"version": "0.0.1",
+	"repository": {
+		"url": "https://github.com/austincrim/oyro"
+	},
+	"license": "NONE",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"preview": "svelte-kit preview",
+		"lint": "prettier --check --plugin-search-dir=. .",
+		"format": "prettier --write --plugin-search-dir=. ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-netlify": "^1.0.0-next.29",
+		"@sveltejs/adapter-vercel": "^1.0.0-next.27",
+		"@sveltejs/kit": "^1.0.0-next.161",
+		"prettier": "~2.2.1",
+		"prettier-plugin-svelte": "^2.2.0",
+		"prisma": "^2.28.0",
+		"svelte": "^3.34.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"@lukeed/uuid": "^2.0.0",
+		"@prisma/client": "^2.28.0",
+		"cookie": "^0.4.1",
+		"plaid": "^9.0.0-beta.14"
+	}
 }
