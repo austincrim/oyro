@@ -1,7 +1,7 @@
 import { getUser, isValidSession, refreshSession } from '$lib/auth'
 import cookie from 'cookie'
 
-const AUTHORIZED_PATHS = ['/', '/budgets', '/transactions', '/api/transactions']
+const AUTHORIZED_PATHS = ['/', '/budgets', '/transactions', '/api/transactions', '/api/accounts']
 
 /**
  * @type {import('@sveltejs/kit').Handle}

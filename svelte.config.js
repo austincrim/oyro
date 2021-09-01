@@ -4,6 +4,7 @@ import vercel from '@sveltejs/adapter-vercel'
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
+		router: false,
 		target: '#svelte',
 		adapter: netlify({
 			esbuild: (defaults) => {
