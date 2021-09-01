@@ -7,13 +7,15 @@
 	<ul>
 		{#if $session?.email}
 			<li>
-				<a class:active={$page.path === '/'} href="/">Dashboard</a>
+				<a sveltekit:prefetch class:active={$page.path === '/'} href="/">Dashboard</a>
 			</li>
 			<li>
 				<a class:active={$page.path === '/budgets'} href="/budgets">Budgets</a>
 			</li>
 			<li>
-				<a class:active={$page.path === '/transactions'} href="/transactions"> Transactions </a>
+				<a sveltekit:prefetch class:active={$page.path === '/transactions'} href="/transactions">
+					Transactions
+				</a>
 			</li>
 		{/if}
 	</ul>
