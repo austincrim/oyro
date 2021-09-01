@@ -1,6 +1,7 @@
 [build]
-command = "AWS_LAMBDA_JS_RUNTIME=14.7.6 npm run build"
+command = "npm run build"
 publish = "build"
+environment = { AWS_LAMBDA_JS_RUNTIME = "nodejs14.x" }
 
 [dev]
 command = "svelte-kit dev"
