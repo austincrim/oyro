@@ -25,6 +25,7 @@
 	"dependencies": {
 		"@lukeed/uuid": "^2.0.0",
 		"@prisma/client": "^2.28.0",
+		"argon2": "^0.28.2",
 		"cookie": "^0.4.1",
 		"plaid": "^9.0.0-beta.14"
 	}

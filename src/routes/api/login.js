@@ -1,5 +1,5 @@
 import prisma from '$lib/prisma'
-// import argon from 'argon2'
+import argon from 'argon2'
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
@@ -14,8 +14,7 @@ export const post = async ({ body }) => {
 		}
 	}
 
-	// const hashed = await argon.hash(password)
-	const hashed = password + '123'
+	const hashed = await argon.hash(password)
 
 	let session, user
 
@@ -26,8 +25,7 @@ export const post = async ({ body }) => {
 	})
 
 	if (user?.email) {
-		// const match = await argon.verify(user.password, password)
-		const match = user.password === password
+		const match = await argon.verify(user.password, password)
 		if (!match) {
 			return {
 				status: 400
