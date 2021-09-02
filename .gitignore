@@ -9,4 +9,4 @@ token.json
 # Local Netlify folder
 .netlify
 
-.vercel
+.vercel*
