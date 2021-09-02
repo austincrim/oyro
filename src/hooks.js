@@ -34,7 +34,7 @@ export const handle = async ({ request, resolve }) => {
 			}))
 		}
 	} else {
-		if (request.path === '/login' && isValidSession) {
+		if (request.path === '/login' && validSession) {
 			return {
 				...(await resolve(request)),
 				status: 302,
@@ -45,7 +45,7 @@ export const handle = async ({ request, resolve }) => {
 		}
 	}
 
-	return resolve(request)
+	return await resolve(request)
 }
 
 /** @type {import('@sveltejs/kit').GetSession} */
