@@ -4,6 +4,9 @@ import vercel from '@sveltejs/adapter-vercel'
 const config = {
 	kit: {
 		target: '#svelte',
+		prerender: {
+			enabled: false
+		},
 		adapter: vercel({
 			esbuild: (opts) => ({ ...opts, external: ['mock-aws-s3', 'aws-sdk', 'nock'] })
 		}),
