@@ -44,7 +44,7 @@
 	<ul>
 		{#each transactions as t}
 			<li>
-				<div class='column'>
+				<div class="column">
 					<div class="merchant">{t.name}</div>
 					<div class="categories">{t.category.join(' | ')}</div>
 				</div>
@@ -60,7 +60,6 @@
 	</ul>
 {:else}
 	<div class="empty">
-		<span class="text-lg text-primary">Let's get started!</span>
 		<button on:click={initiateLink} data-type="primary"> Add an account </button>
 	</div>
 {/if}
@@ -76,20 +75,20 @@
 	li {
 		display: flex;
 		justify-content: space-between;
-    align-items: center;
+		align-items: center;
 		border-top: 1px solid lightgrey;
 		padding: 2rem 1rem;
 	}
 
-  .column {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+	.column {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
 
-  .categories {
-    font-weight: 200;
-  }
+	.categories {
+		font-weight: 200;
+	}
 
 	.amount {
 		font-weight: bold;
@@ -103,6 +102,5 @@
 		height: 70%;
 		display: grid;
 		place-content: center;
-		gap: 1rem;
 	}
 </style>
