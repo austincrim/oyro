@@ -5,7 +5,7 @@ const config = {
 	kit: {
 		target: '#svelte',
 		adapter: vercel({
-			esbuild: (opts) => ({ ...opts, external: ['mock-aws-s3', 'aws-sdk', 'nock'] })
+			esbuild: (opts) => ({ ...opts, bundle: false })
 		}),
 		vite: {
 			ssr: {
