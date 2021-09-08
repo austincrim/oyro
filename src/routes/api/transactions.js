@@ -3,9 +3,10 @@ import client from '$lib/plaid'
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export const get = async ({ query, locals }) => {
-	const itemId = query.get('itemId')
+	const itemId = locals.user.items[0].itemId
+	const offset = query.get('offset')
 	const accessToken = await getAccessToken(locals.user.email, itemId)
-	const t = await fetchTransactions(accessToken)
+	const t = await fetchTransactions(accessToken, Number(offset))
 
 	return {
 		status: 200,
@@ -13,12 +14,17 @@ export const get = async ({ query, locals }) => {
 	}
 }
 
-async function fetchTransactions(accessToken) {
+async function fetchTransactions(accessToken, offset = 0) {
 	const formatter = new Intl.DateTimeFormat('fr-CA')
+	/** @type {import('plaid').TransactionsGetRequest} */
 	const request = {
 		access_token: accessToken,
-		start_date: formatter.format(new Date(Date.now() - 1000 * 3600 * 24 * 30)),
-		end_date: formatter.format(new Date())
+		start_date: formatter.format(new Date(Date.now() - 1000 * 3600 * 24 * 30 * 12)),
+		end_date: formatter.format(new Date()),
+		options: {
+			count: 30,
+			offset
+		}
 	}
 	try {
 		const response = await client.transactionsGet(request)

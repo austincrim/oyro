@@ -1,5 +1,4 @@
 import client from '$lib/plaid'
-import * as fs from 'fs'
 import prisma from '$lib/prisma'
 
 /**
@@ -7,7 +6,7 @@ import prisma from '$lib/prisma'
  */
 export const post = async ({ body, locals }) => {
   try {
-    if (body.public_token) {
+    if (body?.public_token) {
       const user = locals.user
       const { access_token, item_id } = await getAccessToken(body.public_token)
       await saveItem({
@@ -16,12 +15,15 @@ export const post = async ({ body, locals }) => {
         user
       })
       return {
-        status: 200
+        status: 302,
+        headers: {
+          location: '/transactions'
+        }
       }
     }
     const request = {
       user: {
-        client_user_id: 'abc'
+        client_user_id: locals.user.email
       },
       client_name: 'Oyro',
       products: ['transactions'],
@@ -34,7 +36,7 @@ export const post = async ({ body, locals }) => {
       body: createTokenResponse.data
     }
   } catch (error) {
-    console.error(JSON.stringify(error, null, 2))
+    console.error(error)
     return {
       status: 500
     }

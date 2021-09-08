@@ -11,6 +11,19 @@ export const handle = async ({ request, resolve }) => {
 
 	const validSession = await isValidSession(sessionCookie?.session_id)
 
+	try {
+		await refreshSession(sessionCookie?.session_id)
+	} catch (e) {
+		console.error('swallowing session error')
+	}
+	const user = await getUser(sessionCookie?.session_id)
+	request.locals.user = {
+		email: user.email,
+		items: user.items.map((item) => ({
+			itemId: item.itemId
+		}))
+	}
+
 	if (AUTHORIZED_PATHS.includes(request.path)) {
 		if (!validSession) {
 			return {
@@ -20,18 +33,6 @@ export const handle = async ({ request, resolve }) => {
 					location: '/login'
 				}
 			}
-		}
-		try {
-			await refreshSession(sessionCookie?.session_id)
-		} catch (e) {
-			console.error('swallowing session error')
-		}
-		const user = await getUser(sessionCookie?.session_id)
-		request.locals.user = {
-			email: user.email,
-			items: user.items.map((item) => ({
-				itemId: item.itemId
-			}))
 		}
 	} else {
 		if (request.path === '/login' && validSession) {

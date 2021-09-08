@@ -53,10 +53,6 @@
 		font-family: 'Noto Sans', sans-serif;
 	}
 
-	:global(h1, h2, h3, h4, h5, h6) {
-		/* color: var(--text-primary); */
-	}
-
 	:global(html, body, #svelte) {
 		height: 100%;
 		width: 100%;
@@ -88,6 +84,10 @@
 
 	:global(li) {
 		list-style: none;
+	}
+
+	:global(button) {
+		cursor: pointer;
 	}
 
 	:global(button[data-type='primary']) {
@@ -140,7 +140,7 @@
 	}
 
 	main {
-		max-width: clamp(400px, 80vw, 1000px);
+		max-width: clamp(400px, 80vw, 1200px);
 		margin: 0 auto;
 		padding: 4rem;
 		height: 100%;
