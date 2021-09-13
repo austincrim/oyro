@@ -17,11 +17,13 @@ export const handle = async ({ request, resolve }) => {
 		console.error('swallowing session error')
 	}
 	const user = await getUser(sessionCookie?.session_id)
-	request.locals.user = {
-		email: user.email,
-		items: user.items.map((item) => ({
-			itemId: item.itemId
-		}))
+	if (user) {
+		request.locals.user = {
+			email: user.email,
+			items: user.items.map((item) => ({
+				itemId: item.itemId
+			}))
+		}
 	}
 
 	if (AUTHORIZED_PATHS.includes(request.path)) {
