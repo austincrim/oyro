@@ -10,7 +10,7 @@ export const get = async ({ query, locals }) => {
 
 	return {
 		status: 200,
-		body: t
+		body: JSON.stringify(t)
 	}
 }
 
@@ -24,7 +24,7 @@ async function fetchTransactions(accessToken, offset = 0) {
 		options: {
 			count: 30,
 			offset
-		}
+		},
 	}
 	try {
 		const response = await client.transactionsGet(request)

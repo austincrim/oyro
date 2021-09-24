@@ -20,6 +20,6 @@ async function fetchAccounts(tokens) {
 		)
 		return responses.flatMap((response) => response.data.accounts)
 	} catch (err) {
-		console.error(err.response.data)
+		console.error(err)
 	}
 }

@@ -1,9 +1,9 @@
 <script>
-	import { page, navigating, session } from '$app/stores'
+	import { page, session } from '$app/stores'
 </script>
 
 <nav>
-	<span class:loading={$navigating} class="brand">Oyro</span>
+	<span class="brand">Oyro</span>
 	<ul>
 		{#if $session?.email}
 			<li>

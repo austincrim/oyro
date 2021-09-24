@@ -13,7 +13,8 @@
 		return {
 			props: {
 				transactions: []
-			}
+			},
+			maxage: 10
 		}
 	}
 </script>
@@ -28,7 +29,7 @@
 	/** @type {import('plaid').Transaction[]} */
 	let paginatedTransactions = JSON.parse(JSON.stringify(transactions))
 	let offset = 0
-	$: total = transactions.filter((t) => t.amount >= 0).reduce((acc, t) => (acc += t.amount), 0)
+	$: total = paginatedTransactions.filter((t) => t.amount >= 0).reduce((acc, t) => (acc += t.amount), 0)
 
 	const STATE = { LOADING: 'LOADING', ERROR: 'ERROR', SUCCESS: 'SUCCESS' }
 	let status = STATE.SUCCESS
