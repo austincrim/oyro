@@ -14,7 +14,12 @@ export const get = async ({ query, locals }) => {
 	}
 }
 
+const cache = new Map()
 async function fetchTransactions(accessToken, offset = 0) {
+	if (cache.has(accessToken + offset)) {
+		console.log('cache hit!');
+		return cache.get(accessToken + offset)
+	}
 	const formatter = new Intl.DateTimeFormat('fr-CA')
 	/** @type {import('plaid').TransactionsGetRequest} */
 	const request = {
@@ -24,10 +29,11 @@ async function fetchTransactions(accessToken, offset = 0) {
 		options: {
 			count: 30,
 			offset
-		},
+		}
 	}
 	try {
 		const response = await client.transactionsGet(request)
+		cache.set(accessToken + offset, response.data.transactions)
 		return response.data.transactions
 	} catch (err) {
 		console.error(err.response.data)

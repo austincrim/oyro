@@ -13,8 +13,7 @@
 		return {
 			props: {
 				transactions: []
-			},
-			maxage: 10
+			}
 		}
 	}
 </script>
@@ -24,12 +23,14 @@
 	export let transactions = []
 
 	import { initLink } from '$lib/plaid-link'
-	import { slide } from 'svelte/transition'
+	import { fade } from 'svelte/transition'
 
 	/** @type {import('plaid').Transaction[]} */
 	let paginatedTransactions = JSON.parse(JSON.stringify(transactions))
 	let offset = 0
-	$: total = paginatedTransactions.filter((t) => t.amount >= 0).reduce((acc, t) => (acc += t.amount), 0)
+	$: total = paginatedTransactions
+		.filter((t) => t.amount >= 0)
+		.reduce((acc, t) => (acc += t.amount), 0)
 
 	const STATE = { LOADING: 'LOADING', ERROR: 'ERROR', SUCCESS: 'SUCCESS' }
 	let status = STATE.SUCCESS
@@ -62,7 +63,7 @@
 {#if paginatedTransactions.length > 0}
 	<ul>
 		{#each paginatedTransactions as t (t.transaction_id)}
-			<li in:slide={{ duration: 500 }}>
+			<li in:fade={{ duration: 500 }}>
 				<div class="column">
 					<div class="merchant">{t.name}</div>
 					<div class="categories">{t.category.join(' | ')}</div>
@@ -82,8 +83,11 @@
 			<span>{numberFormatter.format(total)}</span>
 		</li>
 	</ul>
-	<button class:loading={status === STATE.LOADING} on:click={fetchMore} class="more" data-type="primary"
-		>Load more</button
+	<button
+		class:loading={status === STATE.LOADING}
+		on:click={fetchMore}
+		class="more"
+		data-type="primary">Load more</button
 	>
 {:else}
 	<div class="empty">
@@ -138,7 +142,7 @@
 	}
 
 	.loading {
-		opacity: .3;
+		opacity: 0.3;
 		cursor: not-allowed;
 	}
 </style>

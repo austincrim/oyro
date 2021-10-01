@@ -25,18 +25,13 @@
 </main>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
-
+	@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
 	:root {
 		--primary-opacity: 100%;
-		--text-opacity: 75%;
-		--text-hover-opacity: 100%;
 
-		--bg-primary: hsl(0 65% 61%);
-		--bg-primary-hover: hsl(0 65% 61% / 75%);
-		--text-link: hsl(0 0% 0% / var(--text-opacity));
-		--text-link-hover: hsl(0 0% 0% / var(--text-hover-opacity));
-		--text-primary: hsl(0 0% 97% / var(--primary-opacity));
+		--bg-primary: hsl(0 0% 98%);
+		--bg-primary-hover: hsl(0 0% 95%);
+		--text-primary: hsl(0 0% 5% / var(--primary-opacity));
 
 		--radius: 7px;
 		--text-2xl: 3rem;
@@ -44,18 +39,20 @@
 		--text-lg: 2rem;
 		--text-md: 1rem;
 		--text-sm: 0.75rem;
+		
 	}
-
+	
 	:global(*) {
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		font-family: 'Noto Sans', sans-serif;
 	}
-
+	
 	:global(html, body, #svelte) {
 		height: 100%;
 		width: 100%;
+		font-family: 'Baloo 2', sans-serif;
+		font-size: 1.1rem;
 	}
 
 	:global(.text-lg) {
@@ -88,16 +85,17 @@
 
 	:global(button) {
 		cursor: pointer;
+		font-size: 1.3rem;
+		font-family: 'Baloo 2', sans-serif;
 	}
 
 	:global(button[data-type='primary']) {
-		border: none;
 		background-color: var(--bg-primary);
 		color: var(--text-primary);
-		padding: 1rem 2rem;
+		padding: .5rem 1rem;
+		border: 1px solid currentColor;
 		border-radius: var(--radius);
 		transition: background-color 0.1s ease;
-		font-size: 1.1rem;
 	}
 
 	:global(button[data-type='primary']):hover {
@@ -105,7 +103,6 @@
 	}
 
 	.brand {
-		color: var(--text-primary);
 		font-size: 3rem;
 	}
 
@@ -115,22 +112,23 @@
 		justify-content: space-between;
 		align-items: center;
 		background-color: var(--bg-primary);
-		height: 70px;
+		height: 90px;
 		padding: 0 4rem;
-		color: var(--text-primary);
+		border-bottom: 8px solid currentColor;
+		font-size: 1.3rem;
 	}
 
 	a {
 		transition: border-bottom-color 0.1s ease, padding-bottom 0.1s ease;
-		border-bottom: 2px solid #fff;
-		border-bottom-color: #ffffff00;
+		border-bottom: 2px solid currentColor;
+		border-bottom-color: #33333300;
 	}
 
 	li:hover a,
 	li:focus a,
 	.active {
 		padding-bottom: 2px;
-		border-bottom-color: #fff;
+		border-bottom-color: currentColor;
 	}
 
 	ul {
@@ -145,18 +143,5 @@
 		padding: 4rem;
 		height: 100%;
 	}
-
-	.loading {
-		animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-	}
-
-	@keyframes pulse {
-		0%,
-		100% {
-			opacity: 1;
-		}
-		50% {
-			opacity: 0.2;
-		}
-	}
 </style>
+ 
