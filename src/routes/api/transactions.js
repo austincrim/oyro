@@ -8,6 +8,12 @@ export const get = async ({ query, locals }) => {
 	const accessToken = await getAccessToken(locals.user.email, itemId)
 	const t = await fetchTransactions(accessToken, Number(offset))
 
+	if (t.error_code === 'PRODUCT_NOT_READY') {
+		return {
+			status: 202
+		}
+	}
+
 	return {
 		status: 200,
 		body: JSON.stringify(t)
@@ -17,7 +23,7 @@ export const get = async ({ query, locals }) => {
 const cache = new Map()
 async function fetchTransactions(accessToken, offset = 0) {
 	if (cache.has(accessToken + offset)) {
-		console.log('cache hit!');
+		console.log('cache hit!')
 		return cache.get(accessToken + offset)
 	}
 	const formatter = new Intl.DateTimeFormat('fr-CA')
@@ -37,5 +43,6 @@ async function fetchTransactions(accessToken, offset = 0) {
 		return response.data.transactions
 	} catch (err) {
 		console.error(err.response.data)
+		return err.response.data
 	}
 }

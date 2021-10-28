@@ -17,6 +17,7 @@ export const handle = async ({ request, resolve }) => {
 		const user = await getUser(sessionCookie?.session_id)
 		if (user) {
 			request.locals.user = {
+				id: user.id,
 				email: user.email,
 				items: user.items.map((item) => ({
 					itemId: item.itemId

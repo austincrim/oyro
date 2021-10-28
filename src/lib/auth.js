@@ -34,6 +34,7 @@ export async function getUser(sessionId) {
 		include: {
 			user: {
 				select: {
+					id: true,
 					email: true,
 					items: true
 				}

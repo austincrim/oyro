@@ -29,9 +29,10 @@
 	:root {
 		--primary-opacity: 100%;
 
-		--bg-primary: hsl(0 0% 98%);
-		--bg-primary-hover: hsl(0 0% 95%);
-		--text-primary: hsl(0 0% 5% / var(--primary-opacity));
+		--bg-primary: hsl(0 0% 15%);
+		--bg-primary-hover: hsl(0 0% 25%);
+		--text-primary: hsl(0 0% 95% / var(--primary-opacity));
+		--link-primary: hsl(0 0% 15% / var(--primary-opacity));
 
 		--radius: 7px;
 		--text-2xl: 3rem;
@@ -75,7 +76,7 @@
 	}
 
 	:global(a) {
-		color: var(--text-primary);
+		color: var(--link-primary);
 		text-decoration: none;
 	}
 
@@ -111,10 +112,9 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background-color: var(--bg-primary);
 		height: 90px;
 		padding: 0 4rem;
-		border-bottom: 8px solid currentColor;
+		border-bottom: 6px solid currentColor;
 		font-size: 1.3rem;
 	}
 

@@ -3,9 +3,19 @@
 	export const load = async ({ fetch, session }) => {
 		if (session?.items?.length > 0) {
 			const res = await fetch('/api/transactions')
-			return {
-				props: {
-					transactions: await res.json()
+			if (res.status === 200) {
+				return {
+					props: {
+						transactions: await res.json()
+					}
+				}
+			}
+
+			if (res.status === 202) {
+				return {
+					props: {
+						ready: false
+					}
 				}
 			}
 		}
@@ -21,6 +31,7 @@
 <script>
 	/** @type {import('plaid').Transaction[]} */
 	export let transactions = []
+	export let ready = false
 
 	import { initLink } from '$lib/plaid-link'
 	import { fade } from 'svelte/transition'
@@ -89,8 +100,13 @@
 		class="more"
 		data-type="primary">Load more</button
 	>
+{:else if !ready}
+	<div class="center">
+		<p class="hold-on">Hold on ⌚</p>
+		<p>Your transaction data isn't quite ready. Check back soon!</p>
+	</div>
 {:else}
-	<div class="empty">
+	<div class="center">
 		<button on:click={initiateLink} data-type="primary"> Add an account </button>
 	</div>
 {/if}
@@ -130,7 +146,7 @@
 		font-weight: bold;
 	}
 
-	.empty {
+	.center {
 		height: 70%;
 		display: grid;
 		place-content: center;
@@ -144,5 +160,10 @@
 	.loading {
 		opacity: 0.3;
 		cursor: not-allowed;
+	}
+
+	.hold-on {
+		font-size: 1.5rem;
+		font-weight: bold;
 	}
 </style>
