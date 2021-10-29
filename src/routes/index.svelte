@@ -7,7 +7,8 @@
 				return {
 					props: {
 						accounts: await res.json()
-					}
+					},
+					maxage: 1000
 				}
 			}
 		}
@@ -55,6 +56,7 @@
 <style>
 	ul {
 		margin-top: 4rem;
+		max-width: 60ch;
 	}
 	li {
 		display: flex;

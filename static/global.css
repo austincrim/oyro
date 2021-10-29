@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
+:root {
+  --primary-opacity: 100%;
+
+  --bg-primary: hsl(0 0% 15%);
+  --bg-primary-hover: hsl(0 0% 25%);
+  --text-primary: hsl(0 0% 95% / var(--primary-opacity));
+  --link-primary: hsl(0 0% 15% / var(--primary-opacity));
+
+  --radius: 7px;
+  --text-2xl: 3rem;
+  --text-xl: 2.5rem;
+  --text-lg: 2rem;
+  --text-md: 1rem;
+  --text-sm: 0.75rem;
+  
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #svelte {
+  height: 100%;
+  width: 100%;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.1rem;
+}
+
+.text-lg {
+  font-size: var(--text-lg);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid lightgrey;
+}
+
+a {
+  color: var(--link-primary);
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-family: 'Baloo 2', sans-serif;
+}
+
+button[data-type='primary'] {
+  background-color: var(--bg-primary);
+  border: none;
+  color: var(--text-primary);
+  padding: .5rem 1rem;
+  border-radius: var(--radius);
+  transition: background-color 0.1s ease;
+}
+
+button[data-type='primary']:where(:hover, :focus) {
+  background-color: var(--bg-primary-hover);
+}
