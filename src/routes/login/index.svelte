@@ -26,7 +26,7 @@
 	svg {
 		flex-shrink: 0;
 		height: auto;
-		width: 300px;
+		width: 250px;
 		aspect-ratio: 1 / 1;
 		margin-inline: auto;
 	}
@@ -34,10 +34,11 @@
 	h1 {
 		text-align: center;
 	}
+
 	form {
 		display: flex;
 		flex-direction: column;
-		padding: 4rem 0;
+		padding: 2rem 0;
 		gap: 1rem;
 	}
 

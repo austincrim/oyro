@@ -7,7 +7,8 @@
 				return {
 					props: {
 						transactions: await res.json()
-					}
+					},
+					maxage: 300
 				}
 			}
 
@@ -80,10 +81,10 @@
 					<div class="categories">{t.category.join(' | ')}</div>
 				</div>
 				<div class="column">
-					<div class="amount">
+					<div class="amount" class:expense={t.amount > 0}>
 						{numberFormatter.format(t.amount)}
 					</div>
-					<div>
+					<div style="white-space: nowrap">
 						{dateFormatter.format(new Date(t.date))}
 					</div>
 				</div>
@@ -134,17 +135,6 @@
 		gap: 1rem;
 	}
 
-	@media (max-width: 760px) {
-		li {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-
-		.amount {
-			align-self: flex-start;
-		}
-	}
-
 	.categories {
 		font-weight: 200;
 	}
@@ -152,6 +142,10 @@
 	.amount {
 		font-weight: bold;
 		align-self: flex-end;
+	}
+
+	.expense {
+		color: hsl(0, 80%, 50%);
 	}
 
 	.bold {
@@ -177,5 +171,22 @@
 	.hold-on {
 		font-size: 1.5rem;
 		font-weight: bold;
+	}
+
+	@media (max-width: 600px) {
+		:global(main) {
+			padding: 0 !important;
+		}
+
+		li {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 3rem;
+		}
+
+		.amount {
+			align-self: flex-start;
+			align-self: auto;
+		}
 	}
 </style>

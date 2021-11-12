@@ -60,6 +60,16 @@
 </main>
 
 <style>
+	svg {
+		transition: transform 0.2s ease;
+		z-index: 0;
+	}
+
+	.brand-text:hover svg {
+		transform-origin: center;
+		transform: rotate(15deg);
+	}
+
 	.brand {
 		font-size: 3rem;
 	}
@@ -71,6 +81,7 @@
 
 	.yro {
 		margin-left: -5px;
+		z-index: 1;
 	}
 
 	nav {
@@ -81,7 +92,7 @@
 		height: 90px;
 		padding: 0 4rem;
 		border-bottom: 6px solid currentColor;
-		font-size: 1.3rem;
+		font-size: 1.1rem;
 	}
 
 	a {
