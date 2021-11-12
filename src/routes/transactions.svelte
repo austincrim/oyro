@@ -76,7 +76,7 @@
 		{#each paginatedTransactions as t (t.transaction_id)}
 			<li in:fade={{ duration: 500 }}>
 				<div class="column">
-					<div class="merchant">{t.name}</div>
+					<div class="bold">{t.name}</div>
 					<div class="categories">{t.category.join(' | ')}</div>
 				</div>
 				<div class="column">
@@ -89,7 +89,7 @@
 				</div>
 			</li>
 		{/each}
-		<li class="total">
+		<li class="bold">
 			<span>Total</span>
 			<span>{numberFormatter.format(total)}</span>
 		</li>
@@ -125,12 +125,24 @@
 		align-items: center;
 		border-top: 1px solid lightgrey;
 		padding: 2rem 1rem;
+		gap: 1rem;
 	}
 
 	.column {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+	}
+
+	@media (max-width: 760px) {
+		li {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.amount {
+			align-self: flex-start;
+		}
 	}
 
 	.categories {
@@ -142,7 +154,7 @@
 		align-self: flex-end;
 	}
 
-	.total {
+	.bold {
 		font-weight: bold;
 	}
 
