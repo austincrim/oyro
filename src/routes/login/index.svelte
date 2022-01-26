@@ -13,11 +13,11 @@
 <form action="/api/login" method="POST">
 	<label>
 		Email
-		<input name="email" type="email" />
+		<input required name="email" type="email" />
 	</label>
 	<label>
 		Password
-		<input name="password" type="password" />
+		<input required name="password" type="password" />
 	</label>
 	<button data-type="primary">Sign up</button>
 </form>

@@ -32,7 +32,7 @@
 <script>
 	/** @type {import('plaid').Transaction[]} */
 	export let transactions = []
-	export let ready = false
+	export let ready = true
 
 	import { initLink } from '$lib/plaid-link'
 	import { fade } from 'svelte/transition'

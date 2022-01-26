@@ -1,11 +1,13 @@
 <script>
 	import { page, session } from '$app/stores'
+	import boop from 'svelte-use-boop'
 </script>
 
 <nav>
 	<span class="brand">
 		<a href="/" class="brand-text">
 			<svg
+				use:boop
 				width="64"
 				height="64"
 				viewBox="0 0 64 64"
@@ -60,7 +62,7 @@
 </main>
 
 <style>
-	svg {
+	/* svg {
 		transition: transform 0.2s ease;
 		z-index: 0;
 	}
@@ -68,7 +70,7 @@
 	.brand-text:hover svg {
 		transform-origin: center;
 		transform: rotate(15deg);
-	}
+	} */
 
 	.brand {
 		font-size: 3rem;

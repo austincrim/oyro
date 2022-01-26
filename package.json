@@ -28,6 +28,7 @@
 		"@prisma/client": "^3.3.0",
 		"argon2": "^0.28.2",
 		"cookie": "^0.4.1",
-		"plaid": "^9.0.0-beta.14"
+		"plaid": "^9.0.0-beta.14",
+		"svelte-use-boop": "^0.0.3"
 	}
 }
